@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: angularnginxui 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: angularnginxui
+  template:
+    metadata:
+      labels:
+        app: angularnginxui 
+    spec:
+      containers:
+        - name: angularnginxui 
+          image: arkdockerregistry.azurecr.io/angularnginxui
+          ports:
+          - containerPort: 4200
