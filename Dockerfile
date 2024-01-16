@@ -12,7 +12,7 @@ RUN ng v
 
 COPY . ./
 # RUN ng b --configuration=production
-RUN ng b
+RUN ng build
 
 FROM nginx:1.21.6-alpine
 WORKDIR /usr/share/nginx/html
