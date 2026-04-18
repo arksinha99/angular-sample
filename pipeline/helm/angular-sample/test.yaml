@@ -1,0 +1,64 @@
+---
+# Source: angular-sample-ui/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: angularnginxui
+  namespace: 
+spec:
+  type: LoadBalancer
+  selector:
+    angular-sample-ui
+  ports:
+  - port: 4200
+---
+# Source: angular-sample-ui/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: angular-sample-ui
+  namespace: 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: angular-sample-ui
+  template:
+    metadata:
+      labels:
+        app: angular-sample-ui
+    spec:
+      containers:
+      - name: angular-sample-ui
+        image: "arkdockerregistry.azurecr.io/angularnginxui:latest"
+        imagePullPolicy: 
+        ports:
+          - containerPort: 4200
+        resources:
+          null
+---
+# Source: angular-sample-ui/templates/ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: angular-sample-ui-ingress
+  namespace: 
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    kubernetes.io/tls-acme: "true"
+spec:
+  rules:
+    - host: chart-example.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: angular-sample-ui-service
+                port:
+                  number: 4200
+  tls:
+    - hosts:
+      - chart-example.local
+      secretName: chart-example-tls
