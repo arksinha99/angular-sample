@@ -1,0 +1,6 @@
+dependencies:
+- name: ui-helm-lib-generic
+  repository: file://../ui-helm-lib-generic
+  version: 0.1.0
+digest: sha256:af64a7cd0c8afff54e3d0811bbd43991694851ca33010f48b8a924b8fb2184fe
+generated: "2026-04-18T23:45:57.7362889+05:30"
